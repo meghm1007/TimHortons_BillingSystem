@@ -71,7 +71,7 @@ def send_email():
             ob.starttls()
             ob.login(sender_entry.get(), password_entry.get())
             message = email_textarea.get(1.0, END)
-            receiver_address = recipient_entry.get()
+            receiver_address = receiver_entry.get()
             ob.quit()
             ob.sendmail(sender_entry.get(), receiver_address, message)
             messagebox.showinfo('Success', 'Email was sent')
@@ -88,43 +88,41 @@ def send_email():
         root1.config(bg='red')
         root1.resizable(0,0)
 
-        sender_frame = LabelFrame(root1, text='Sender', font=('arial', 16, 'bold'))
-        sender_frame.grid(row=0, column=0, padx=10, pady=8)
+        sender_frame = LabelFrame(root1, text="Sender", font=('arial', 16,'bold'), bd=6)
+        sender_frame.grid(row=0, column=0, padx=40, pady=20)
 
-        sender_label = Label(sender_frame, text="Sender's Email", font=('arial', 14, 'bold'), bg='white')
-        sender_label.grid(row=0, column=0)
+        senderLabel = Label(sender_frame, text="Sender's email", font=('arial', 16,'bold'))
+        senderLabel.grid(row=0, column=0, padx=10, pady=8)
 
-        sender_entry = Entry(sender_frame, font=('arial', 14, 'bold'), bd=2, width=23, relief=RIDGE)
-        sender_entry.grid(row=0, column=1)
+        sender_entry = Entry(sender_frame, font=('arial', 14, 'bold'), width=23, bd=2)
+        sender_entry.grid(row=0, column=1, padx=10, pady=8)
 
-        password_label = Label(sender_frame, text="Password", font=('arial', 14, 'bold'), bg='white')
-        password_label.grid(row=1, column=0)
+        passwordLabel = Label(sender_frame, text="Password", font=('arial', 16, 'bold'))
+        passwordLabel.grid(row=1, column=0, padx=10, pady=8)
 
-        password_entry = Entry(sender_frame, font=('arial', 14, 'bold'), bd=2, width=23, relief=RIDGE,
-                               show="*")
-        password_entry.grid(row=1, column=1)
+        password_entry = Entry(sender_frame, font=('arial', 14, 'bold'), width=23)
+        password_entry.grid(row=1, column=1, padx=10, pady=8)
 
-        recipient_frame = LabelFrame(root1, text="Customer", font=('arial', 14, 'bold'), bg='white')
-        recipient_frame.grid(row=1, column=0, padx=40, pady=20)
+        recipientFrame = LabelFrame(root1, text="RECIPIENT", font=('arial', 16, 'bold'))
+        recipientFrame.grid(row=1, column=0, padx=10, pady=8)
 
-        recipient_label = Label(recipient_frame, text="Email address", font=('arial', 14, 'bold'), bg='white')
-        recipient_label.grid(row=0, column=0, padx=10, pady=8)
+        receiverLabel = Label(recipientFrame, text="Email address", font=('arial', 16, 'bold'))
+        receiverLabel.grid(row=0, column=0, padx=10, pady=8)
 
-        recipient_entry = Entry(recipient_frame, font=('arial', 14, 'bold'), bd=2, width=23, relief=RIDGE)
-        recipient_entry.grid(row=0, column=1, padx=10, pady=8)
+        receiver_entry = Entry(recipientFrame, font=('arial', 14, 'bold'), width=23, bd=2)
+        receiver_entry.grid(row=0, column=1, padx=10, pady=8)
 
-        messageLabel = Label(recipient_frame, text="Message", font=('arial', 14, 'bold'), bg='white')
-        messageLabel.grid(row=1, column=0, padx=10, pady=8)
+        receiverLabel = Label(recipientFrame, text="Message", font=('arial', 16, 'bold'))
+        receiverLabel.grid(row=1, column=0, padx=10, pady=8)
 
-        email_textarea = Text(recipient_frame, font=('arial', 14, 'bold'), bg='white', width=43, height=11)
-        email_textarea.grid(row=2, column=1,columnspan=2)
-        email_textarea.grid(row=2, column=0, rowspan=2)
+        email_textarea = Text(recipientFrame, font=('arial', 14, 'bold'), bd=2, width=42, height=11)
         email_textarea.delete(1.0, END)
+        email_textarea.insert(END, textArea.get(1.0,END).replace('=', ''))
+        email_textarea.grid(row=2, column=0, columnspan=2)
 
+        sendButton = Button(root1, text='SEND', font=('arial',14,'bold'), width=15, command=send_gmail)
+        sendButton.grid(row=2, column=0, pady=20)
 
-        send_button = Button(root1, text='SEND', font=('arial', 14, 'bold'), width=15,
-                              command=send_gmail)
-        send_button.grid(row=2, column=0, pady=20)
 
         root1.mainloop()
 def print_bill():
@@ -228,58 +226,58 @@ def bill_area():
         textArea.insert(END, '\nProduct\t\t\tQuantity\t\t\tCost')
         textArea.insert(END, '\n****************************************************')
 
-        if prod1EntryD.get()!=0:
+        if prod1EntryD.get()!='0':
             textArea.insert(END, f'\nIced Coffee\t\t\t{prod1EntryD.get()}\t\t\t{pd1}')
 
-        if prod2EntryD.get()!=0:
+        if prod2EntryD.get()!='0':
             textArea.insert(END, f'\nMocha Iced Cap\t\t\t{prod2EntryD.get()}\t\t\t{pd2}')
 
-        if prod3EntryD.get()!=0:
+        if prod3EntryD.get()!='0':
             textArea.insert(END, f'\nMilk\t\t\t{prod3EntryD.get()}\t\t\t{pd3}')
 
-        if prod4EntryD.get()!=0:
+        if prod4EntryD.get()!='0':
             textArea.insert(END, f'\nCappuccino\t\t\t{prod4EntryD.get()}\t\t\t{pd4}')
 
-        if prod5EntryD.get()!=0:
+        if prod5EntryD.get()!='0':
             textArea.insert(END, f'\nHot Chocolate\t\t\t{prod5EntryD.get()}\t\t\t{pd5}')
 
-        if prod6EntryD.get()!=0:
+        if prod6EntryD.get()!='0':
             textArea.insert(END, f'\nFrench Vanilla\t\t\t{prod6EntryD.get()}\t\t\t{pd6}')
 
-        if prod1EntryF.get()!=0:
+        if prod1EntryF.get()!='0':
             textArea.insert(END, f'\nFarmer\'s Sandwich\t\t\t{prod1EntryF.get()}\t\t\t{pf1}')
 
-        if prod2EntryF.get()!=0:
+        if prod2EntryF.get()!='0':
             textArea.insert(END, f'\nBacon Sandwich\t\t\t{prod2EntryF.get()}\t\t\t{pf2}')
 
-        if prod3EntryF.get()!=0:
+        if prod3EntryF.get()!='0':
             textArea.insert(END, f'\nBagel Belt\t\t\t{prod3EntryF.get()}\t\t\t{pf3}')
 
-        if prod4EntryF.get()!=0:
+        if prod4EntryF.get()!='0':
             textArea.insert(END, f'\nBBQ Chicken Wrap\t\t\t{prod4EntryF.get()}\t\t\t{pf4}')
 
-        if prod5EntryF.get()!=0:
+        if prod5EntryF.get()!='0':
             textArea.insert(END, f'\nVeggie Wrap\t\t\t{prod5EntryF.get()}\t\t\t{pf5}')
 
-        if prod6EntryF.get()!=0:
+        if prod6EntryF.get()!='0':
             textArea.insert(END, f'\nPotato Wedges\t\t\t{prod6EntryF.get()}\t\t\t{pf6}')
 
-        if prod1EntryS.get()!=0:
+        if prod1EntryS.get()!='0':
             textArea.insert(END, f'\n6 Assorted Donuts\t\t\t{prod1EntryS.get()}\t\t\t{ps1}')
 
-        if prod2EntryS.get()!=0:
+        if prod2EntryS.get()!='0':
             textArea.insert(END, f'\n20 Assorted Timbits\t\t\t{prod2EntryS.get()}\t\t\t{ps2}')
 
-        if prod3EntryS.get()!=0:
+        if prod3EntryS.get()!='0':
             textArea.insert(END, f'\nChocolate Chunk Cookie\t\t\t{prod3EntryS.get()}\t\t\t{ps3}')
 
-        if prod4EntryS.get()!=0:
+        if prod4EntryS.get()!='0':
             textArea.insert(END, f'\nChocolate Croissants\t\t\t{prod4EntryS.get()}\t\t\t{ps4}')
 
-        if prod5EntryS.get()!=0:
+        if prod5EntryS.get()!='0':
             textArea.insert(END, f'\nEverything Twist\t\t\t{prod5EntryS.get()}\t\t\t{ps5}')
 
-        if prod6EntryS.get()!=0:
+        if prod6EntryS.get()!='0':
             textArea.insert(END, f'\nSavoury Pastry\t\t\t{prod1EntryS.get()}\t\t\t{ps6}')
 
         textArea.insert(END, f'\n\nCost: {totalPriceEntry.get()}')
